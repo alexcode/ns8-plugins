@@ -57,13 +57,20 @@ module.exports = {
       },
     },
     '⚙️': {
-      script: `npx cowsay "@nativescript/* packages will keep your ⚙️ cranking"`,
-      description: '_____________  @nativescript/*  _____________',
+      script: `npx cowsay "@leoantares/* packages will keep your ⚙️ cranking"`,
+      description: '_____________  @leoantares/*  _____________',
     },
     // packages
     // build output is always in dist/packages
-    '@nativescript': {
-      'build-all': {
+    '@leoantares': {
+      // @leoantares/ns8-batch-notifications
+			'ns8-batch-notifications': {
+				build: {
+					script: 'nx run ns8-batch-notifications:build.all',
+					description: '@leoantares/ns8-batch-notifications: Build',
+				},
+			},
+			'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
       },
@@ -73,8 +80,12 @@ module.exports = {
       description: '_____________  Focus (VS Code supported)  _____________',
     },
     focus: {
-      reset: {
-        script: 'nx g @nativescript/plugin-tools:focus-packages',
+      'ns8-batch-notifications': {
+				script: 'nx run ns8-batch-notifications:focus',
+				description: 'Focus on @leoantares/ns8-batch-notifications',
+			},
+			reset: {
+        script: 'nx g @leoantares/plugin-tools:focus-packages',
         description: 'Reset Focus',
       },
     },

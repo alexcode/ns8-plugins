@@ -1,0 +1,72 @@
+{
+  "root": "packages/ns8-batch-notifications",
+  "projectType": "library",
+  "sourceRoot": "packages/ns8-batch-notifications",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/packages/ns8-batch-notifications",
+        "tsConfig": "packages/ns8-batch-notifications/tsconfig.json",
+        "packageJson": "packages/ns8-batch-notifications/package.json",
+        "main": "packages/ns8-batch-notifications/index.d.ts",
+        "assets": [
+          "packages/ns8-batch-notifications/*.md",
+          "packages/ns8-batch-notifications/index.d.ts",
+          "LICENSE",
+          {
+            "glob": "**/*",
+            "input": "packages/ns8-batch-notifications/platforms/",
+            "output": "./platforms/"
+          }
+        ],
+        "dependsOn": [
+          {
+            "target": "build.all",
+            "projects": "dependencies"
+          }
+        ]
+      }
+    },
+    "build.all": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "node tools/scripts/build-finish.ts ns8-batch-notifications"
+        ],
+        "parallel": false
+      },
+      "outputs": [
+        "dist/packages/ns8-batch-notifications"
+      ],
+      "dependsOn": [
+        {
+          "target": "build.all",
+          "projects": "dependencies"
+        },
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ]
+    },
+    "focus": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "nx g @nativescript/plugin-tools:focus-packages ns8-batch-notifications"
+        ],
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/ns8-batch-notifications/**/*.ts"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
