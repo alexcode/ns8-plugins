@@ -31,7 +31,7 @@ export class BatchNS extends Common {
         this.push.setSmallIconResourceId(pushIconId);
 
         return this.native;
-    };
+    }
 
     activityLifeCycleHelper() {
         return new this.lib.BatchActivityLifecycleHelper();
